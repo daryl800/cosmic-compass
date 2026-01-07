@@ -62,7 +62,7 @@ export function useFortune(refreshKey?: number) {
             };
 
             const res = await fetch(
-                "http://memorykeeper.duckdns.org:8000/bazi",
+                "https://memorykeeper.duckdns.org:8000/bazi",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
