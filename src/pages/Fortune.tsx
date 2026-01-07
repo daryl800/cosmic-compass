@@ -56,13 +56,34 @@ export default function FortunePage() {
     ------------------------------*/
     if (loading || !profile) {
         return (
+            // <div className="min-h-screen flex flex-col items-center justify-center bg-[#121212] text-white">
+            //     <div className="animate-float text-6xl mb-4">🔮</div>
+            //     <p className="text-lg">正在推演你的命盤 …</p>
+            //     <p className="text-sm text-gray-400 mt-2">
+            //         為你整理八字、流年與開運建議
+            //     </p>
+            // </div>
             <div className="min-h-screen flex flex-col items-center justify-center bg-[#121212] text-white">
-                <div className="animate-float text-6xl mb-4">🔮</div>
-                <p className="text-lg">正在推演你的命盤 …</p>
-                <p className="text-sm text-gray-400 mt-2">
-                    為你整理八字、流年與開運建議
+                {/* Original floating emoji line */}
+                <div className="text-4xl animate-bounce">🔮</div>
+
+                {/* Animated text line */}
+                <p className="text-sm text-gray-400 flex flex-wrap justify-center gap-1">
+                    {Array.from("正在努力你整理八字、流年與開運建議，比啲耐性 ... ... ...").map((char, idx) => (
+                        <span
+                            key={idx}
+                            className="inline-block opacity-0 animate-fade-in"
+                            style={{ animationDelay: `${idx * 0.5}s` }}
+                        >
+                            {char}
+                        </span>
+                    ))}
+                    {/* Optional: add emoji at the end */}
+                    <span className="inline-block opacity-0 animate-fade-in" style={{ animationDelay: `${"為你整理八字、流年與開運建議".length * 0.1}s` }}>
+                    </span>
                 </p>
             </div>
+
         );
     }
 
