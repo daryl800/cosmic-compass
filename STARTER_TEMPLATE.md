@@ -573,7 +573,7 @@ export const ProfileForm = () => {
 
     toast({
       title: "命理資料已建立 ✨",
-      description: "正在為你解讀星盤...",
+      description: "正在為你解讀命盤...",
     });
 
     setIsSubmitting(false);
