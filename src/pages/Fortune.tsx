@@ -133,8 +133,8 @@ export default function FortunePage() {
 
                 {regional && (
                     <Card title="🌏 地域 / 方向">
-                        <p>宜：{regional.suitable_regions.join("、")}</p>
-                        <p>忌：{regional.avoid_regions.join("、")}</p>
+                        <p>宜：{regional.favorable_regions.join("、")}</p>
+                        <p>忌：{regional.unfavorable_regions.join("、")}</p>
                         <p>{regional.directions}</p>
                         <p className="text-gray-400 italic mt-2">{regional.reasoning}</p>
                     </Card>
