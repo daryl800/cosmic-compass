@@ -33,13 +33,23 @@ export default function FortunePage() {
     const navigate = useNavigate();
 
     const {
+        loading,
         profile,
         bazi,
-        yearOutlook,
-        lucky,
-        regional,
+        fourPillars,
+        fiveElementsStrength,
+        fiveElementsAnalysis,
+        tenGodsAnalysis,
+        personalityAndCareerLogic,
+        careerFavorable,
+        careerUnfavorable,
+        agePhaseJudgement,
+        auspiciousElements,
+        year2026Analysis,
+        investmentStrategy2026,
         amulet,
-        loading,
+        amuletReason,
+        finalAdvice
     } = useFortune();
 
     /* -----------------------------
@@ -97,10 +107,10 @@ export default function FortunePage() {
                 <h1 className="text-3xl font-bold text-center mb-4">知行順勢</h1>
 
                 <Card title="👤 基本資料">
-                    <p>性別：{profile.gender}</p>
-                    <p>出生：{profile.dob}</p>
-                    {profile.tob && <p>時間：{profile.tob}</p>}
-                    {profile.pob && <p>地點：{profile.pob}</p>}
+                    <p>性別：{profile?.gender}</p>
+                    <p>出生：{profile?.dob}</p>
+                    {profile?.tob && <p>時間：{profile.tob}</p>}
+                    {profile?.pob && <p>地點：{profile.pob}</p>}
                 </Card>
 
                 {bazi?.pillars && bazi?.five_elements_strength && (
@@ -123,33 +133,62 @@ export default function FortunePage() {
                     </div>
                 )}
 
-                {lucky && (
+                {tenGodsAnalysis && (
+                    <Card title="十神分析">
+                        {Object.entries(tenGodsAnalysis).map(([k, v]) => (
+                            <p key={k}><strong>{k}</strong>：{v}</p>
+                        ))}
+                    </Card>
+                )}
+
+                {personalityAndCareerLogic && (
+                    <Card title="性格與職業邏輯">
+                        <p>{personalityAndCareerLogic}</p>
+                    </Card>
+                )}
+
+                <Card title="適合 / 避免行業">
+                    <p>適合：{careerFavorable?.join("、")}</p>
+                    <p>避免：{careerUnfavorable?.join("、")}</p>
+                </Card>
+
+                {agePhaseJudgement && (
+                    <Card title="大運評估">
+                        <p>{agePhaseJudgement}</p>
+                    </Card>
+                )}
+
+                {auspiciousElements && (
                     <Card title="開運元素">
-                        <p>🎨 幸運顏色：{lucky.colors.join("、")}</p>
-                        <p>🔢 幸運數字：{lucky.numbers.join(" · ")}</p>
-                        {amulet && <p>🧿 開運物：{amulet}</p>}
-                    </Card>
-                )}
-
-                {regional && (
-                    <Card title="🌏 地域 / 方向">
-                        <p>宜：{regional.favorable_regions.join("、")}</p>
-                        <p>忌：{regional.unfavorable_regions.join("、")}</p>
-                        <p>有利方位：{regional.directions}</p>
-                        <p className="text-gray-400 italic mt-2">{regional.reasoning}</p>
-                    </Card>
-                )}
-
-                {yearOutlook && (
-                    <Card title="🔮 2026 年流年重點">
-                        <p>📌 {yearOutlook.theme}</p>
-                        <p>🩺 {yearOutlook.health}</p>
-                        <p>❤️ {yearOutlook.relationships}</p>
-                        <p>💼 {yearOutlook.career}</p>
-                        <p>📈 {yearOutlook.investment}</p>
-                        <p className="italic text-gray-400 mt-2">
-                            👉 {yearOutlook.key_advice}
+                        <p>🎨 顏色：{auspiciousElements.colors.join("、")}</p>
+                        <p>🔢 數字：{auspiciousElements.numbers.join("、")}</p>
+                        <p>🧭 方位：{auspiciousElements.directions.join("、")}</p>
+                        <p>🌏 地區：{auspiciousElements.regions.join("、")}</p>
+                        <p>🌦 氣候：{auspiciousElements.climate.join("、")}</p>
+                        <p>🏞 地形：{auspiciousElements.terrain.join("、")}</p>
+                        {auspiciousElements.avoid?.length > 0 && (
+                            <p className="text-gray-400 italic">
+                                避免：{auspiciousElements.avoid.join("、")}
+                            </p>
+                        )}
+                        <p className="text-gray-400 italic mt-2">
+                            {auspiciousElements.usage_tips}
                         </p>
+                    </Card>
+                )}
+
+                {amulet && (
+                    <Card title="🧧 開運物品推薦">
+                        <p>{amulet}</p>
+                        <p className="text-gray-400 italic">{amuletReason}</p>
+                    </Card>
+                )}
+
+                {year2026Analysis && (
+                    <Card title="🔮 2026 流年分析">
+                        <p>{year2026Analysis}</p>
+                        <p className="mt-2">投資策略：{investmentStrategy2026}</p>
+                        <p className="italic text-gray-400 mt-2">{finalAdvice}</p>
                     </Card>
                 )}
 
