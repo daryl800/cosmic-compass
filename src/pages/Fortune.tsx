@@ -5,7 +5,21 @@ import { useFortune } from "@/hooks/useFortune";
 /* -----------------------------
    Helpers
 ------------------------------*/
-const renderDots = (count: number) => "●".repeat(count || 0);
+// const renderDots = (count: number) => "●".repeat(count || 0);
+
+const FULL_DOT = "●";
+const HALF_DOT = "◖"; // 或 "◗"  看你喜歡哪一邊
+
+const renderDots = (value: number) => {
+    const v = value || 0;
+    const fullCount = Math.floor(v);
+    const hasHalf = v > 0 && v < 1 ? true : (v - fullCount > 0 ? true : false);
+
+    const full = FULL_DOT.repeat(fullCount);
+    const half = hasHalf ? HALF_DOT : "";
+    return full + half;
+};
+
 
 const fiveElementCN: Record<string, string> = {
     Wood: "木",
